@@ -116,6 +116,7 @@ function Set-BuildEnvironment {
         $GBEParams.add('GitPath', $GitPath)
     }
     $BuildHelpersVariables = Get-BuildEnvironment @GBEParams
+    write-verbose $buildhelpersvariables.Keys
     foreach ($VarName in $BuildHelpersVariables.Keys) {
         if($null -ne $BuildHelpersVariables[$VarName]) {
             $prefixedVar = "$VariableNamePrefix$VarName"
