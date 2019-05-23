@@ -13,7 +13,9 @@ function Get-BuildEnvironment {
             ProjectPath      via Get-BuildVariable
             BranchName       via Get-BuildVariable
             CommitMessage    via Get-BuildVariable
+            CommitHash       via Get-BuildVariable
             BuildNumber      via Get-BuildVariable
+            FilesChanged     via Get-BuildVariable
             ProjectName      via Get-ProjectName
             PSModuleManifest via Get-PSModuleManifest
             ModulePath       via Split-Path on PSModuleManifest
@@ -100,7 +102,9 @@ function Get-BuildEnvironment {
         ProjectPath = ${Build.Vars}.ProjectPath
         BranchName  = ${Build.Vars}.BranchName
         CommitMessage = ${Build.Vars}.CommitMessage
+        CommitHash = ${Build.Vars}.CommitHash
         BuildNumber = ${Build.Vars}.BuildNumber
+        FilesChanged = ${Build.Vars}.FilesChanged
         ProjectName = ${Build.ProjectName}
         PSModuleManifest = ${Build.ManifestPath}
         ModulePath = ${Build.ModulePath}
