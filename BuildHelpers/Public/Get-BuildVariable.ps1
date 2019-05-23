@@ -272,8 +272,8 @@ function Get-BuildVariable {
         $BuildNumber = 0
     }
 
-    $ENV:BUILD_SOURCEVERSION
-    (get-item -path "ENV:BUILD_SOURCEVERSION").Value
+    write-verbose $ENV:BUILD_SOURCEVERSION
+    write-verbose (get-item -path "ENV:BUILD_SOURCEVERSION").Value
 
     [pscustomobject]@{
         BuildSystem = $BuildSystem
