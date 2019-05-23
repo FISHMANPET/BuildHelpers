@@ -21,6 +21,7 @@ function Get-BuildEnvironment {
             ModulePath       via Split-Path on PSModuleManifest
             BuildOutput      via BuildOutput parameter
 
+            
     .PARAMETER Path
         Path to project root. Defaults to the current working path
 
