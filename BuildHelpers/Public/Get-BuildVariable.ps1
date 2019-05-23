@@ -243,8 +243,17 @@ function Get-BuildVariable {
     {
         if($WeCanGit)
         {
-            $CommitMessage = Invoke-Git @IGParams -Arguments "log --format=%H -n 1"
+            $CommitHash = Invoke-Git @IGParams -Arguments "log --format=%H -n 1"
         }        
+    }
+
+    # List of files changed
+    If ($CommitHash)
+    {
+        if ($WeCanGit)
+        {
+            $FilesChanged = Invoke-Git @IGParams -Arguments "diff-tree --no-commit-id --name-only -r $CommitHash"
+        }
     }
     # Build number
     $BuildNumber = switch ($Environment.Name)
@@ -269,6 +278,7 @@ function Get-BuildVariable {
         BranchName = $BuildBranch
         CommitMessage = $CommitMessage
         CommitHash = $CommitHash
+        FilesChanged = $FilesChanged
         BuildNumber = $BuildNumber
     }
 }
