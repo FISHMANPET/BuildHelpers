@@ -233,19 +233,23 @@ function Get-BuildVariable {
         'CI_COMMIT_SHA'                  { (Get-Item -Path "ENV:$_").Value; break } # GitLab CI
         'GIT_COMMIT'                     { (Get-Item -Path "ENV:$_").Value; break } # Jenkins
         'BUILD_VCS_NUMBER'               { (Get-Item -Path "ENV:$_").Value; break } # Teamcity
-        'BUILD_SOURCEVERSION'            { (Get-Item -Path "ENV:$_").Value; break } # Azure Pipelines
+        'BUILD_SOURCEVERSION'            { (Get-Item -Path "ENV:$_").Value; write-verbose "we found it"; break } # Azure Pipelines
         'BAMBOO_PLANREPOSITORY_REVISION' { (Get-Item -Path "ENV:$_").Value; break } # Bamboo
         'GO_REVISION'                    { (Get-Item -Path "ENV:$_").Value; break } # GoCD
         'TRAVIS_COMMIT'                  { (Get-Item -Path "ENV:$_").Value; break } # Travis CI
         'GITHUB_SHA'                     { (Get-Item -Path "ENV:$_").Value; break } # Github Actions
     }
+    Write-Verbose "commithash is $commithash"
     if(-not $CommitHash)
     {
+        write-verbose "we didn't find it"
         if($WeCanGit)
         {
+            write-verbose "trying to find it"
             $CommitHash = Invoke-Git @IGParams -Arguments "log --format=%H -n 1"
         }        
     }
+    write-verbose "commithash is $commithash #2"
 
     # List of files changed
     If ($CommitHash)
