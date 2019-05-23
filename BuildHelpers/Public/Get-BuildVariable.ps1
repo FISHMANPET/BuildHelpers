@@ -272,6 +272,9 @@ function Get-BuildVariable {
         $BuildNumber = 0
     }
 
+    $ENV:BUILD_SOURCEVERSION
+    (get-item -path $ENV:BUILD_SOURCEVERSION).Value
+    
     [pscustomobject]@{
         BuildSystem = $BuildSystem
         ProjectPath = $BuildRoot
